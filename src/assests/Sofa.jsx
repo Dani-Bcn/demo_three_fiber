@@ -25,8 +25,8 @@ export function Model(props) {
       <mesh geometry={nodes.William_Cushion003.geometry} material={materials.Fabric_Couch} />
       <mesh geometry={nodes.William_Cushion004.geometry} material={materials.Fabric_Couch} />
       <mesh geometry={nodes.William_Cushion005.geometry} material={materials.Fabric_Couch} />
-    </group>
+    </group> 
   )
 }
 
-useGLTF.preload('/sofa.gltf')
+useGLTF.preload('/sofa.gltf')  
