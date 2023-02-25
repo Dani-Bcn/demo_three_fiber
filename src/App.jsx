@@ -41,7 +41,7 @@ function App() {
         </mesh>   */}
       </Canvas>
     </div>
-  )
+  ) 
 }
 
 export default App 
