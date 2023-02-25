@@ -29,4 +29,4 @@ export function Model(props) {
   )
 }
 
-useGLTF.preload('/sofa.gltf')  
+useGLTF.preload('/sofa.gltf')   

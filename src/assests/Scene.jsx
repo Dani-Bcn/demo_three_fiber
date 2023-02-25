@@ -367,7 +367,7 @@ export function Model(props) {
           <mesh geometry={nodes.Würfel_5_3.geometry} material={nodes.Würfel_5_3.material} position={[-267.25, 131.1, -25.67]} />
         </group>
       </group>
-    </group>
+    </group> 
   )
 }
 

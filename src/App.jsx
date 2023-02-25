@@ -19,7 +19,7 @@ function App() {
      
       <Canvas
         style={{
-          width: "100vh",
+          width: "100vh", 
           height: "100vh",
           backgroundColor: "rgba(46,46,46,0)"
         }}>
