@@ -1,8 +1,10 @@
 import { useRef, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, SpotLightShadow } from '@react-three/drei'
-import { Model } from './assests/Boom'
 import { SofaDark } from './assests/SofaDark'
+import { Puf } from './assests/Puf'
+import { motion as m } from 'framer-motion'
+
 
 import './App.css'
 
@@ -14,9 +16,16 @@ function App() {
     }
 
   )
+  const [colorLegsPuf, setColorLegsPuf] = useState(
+    {
+      color: "white"
+    }
+
+  )
 
   const [iluminationFree, setIluminationFree] = useState(0.5)
   const [iluminationColor, setIluminationColor] = useState("rgb(250, 250, 250)")
+  const [isSelected, setIsSelected] = useState(true)
   const colorIluminationWhite = (() => {
     setIluminationColor("rgb(250, 250, 250)")
   })
@@ -66,16 +75,54 @@ function App() {
     })
   ))
 
-  console.log(colorFree.color)
+  console.log(isSelected)
+  const changeColor2black =(()=>{
+      setColorLegsPuf( {
+        color: "black"
+      })
+  })
+  const changeColor2Red =(()=>{
+    setColorLegsPuf( {
+      color: "red"
+    })
+})
+const changeColor2White =(()=>{
+  setColorLegsPuf( {
+    color: "white"
+  })
+})
+const changeColor2Yellow =(()=>{
+  setColorLegsPuf( {
+    color: "yellow"
+  })
+})
+const changeColor2Blue =(()=>{
+  setColorLegsPuf( {
+    color: "blue"
+  })
+})
+const changeColor2Green =(()=>{
+  setColorLegsPuf( {
+    color: "green"
+  })
+})
+
 
   return (
     <div className="App">
+     
+
+      <aside>
+        <button onClick={() => setIsSelected(!isSelected)}>Change Model</button>
+      </aside>
       <section>
-      <button onClick={() => colorIluminationWhite()}>Iluimination White</button>
+        <button onClick={() => colorIluminationWhite()}>Iluimination White</button>
         <button onClick={() => colorIluminationRed()}>Iluimination Red</button>
         <button onClick={() => colorIluminationGreen()}>Iluination Green</button>
         <button onClick={() => colorIluminationBlue()}>Ilumination Blue</button>
         <button onClick={() => colorIluminationYellow()}>Ilumination Yellow</button>
+      </section>
+      <section>
         <button onClick={() => changeColorWhite()}>Color model White</button>
         <button onClick={() => changeColorBlack()}>Color model Black</button>
         <button onClick={() => changeColorRed()}>Color model Red</button>
@@ -84,6 +131,17 @@ function App() {
         <button onClick={() => maxIlumination()}>Ligth +</button>
         <button onClick={() => minIlumination()}>Ligth -</button>
       </section>
+      {
+        !isSelected && (
+          <aside className='buttons-legs'>
+            <button onClick={()=>changeColor2black()}>Color Legs Black </button>
+            <button onClick={()=>changeColor2Red()}>Color Legs Red </button>
+            <button onClick={()=>changeColor2Blue()}>Color Legs Blue </button>
+            <button onClick={()=>changeColor2Yellow()}>Color Legs Yellow </button>
+            <button onClick={()=>changeColor2Green()}>Color Legs Green </button>
+          </aside>
+        )
+      }
 
       <Canvas className='canvas'
         // Rotaciión  cámara X , Y , Z
@@ -91,6 +149,7 @@ function App() {
       >
 
         //position X ,Y ,Z
+        <spotLight position={[0, 10, -10]} intensity={[iluminationFree]} color={iluminationColor} />
         <spotLight position={[0, 0, 100]} intensity={[iluminationFree]} color={iluminationColor} />
         <spotLight position={[0, 0, 100]} intensity={[iluminationFree]} color={iluminationColor} />
         <spotLight position={[0, -100, 0]} intensity={[iluminationFree]} color={iluminationColor} />
@@ -112,23 +171,44 @@ function App() {
     const [hovered, hover] = useState(false)
     const [clicked, click] = useState(false)
 
-    // Subscribe this component to the render-loop, rotate the mesh every frame
+
     /*  useFrame((state, delta) => (ref.current.rotation.x += delta)) */
-    // Return the view, these are regular Threejs elements expressed in JSX
+
 
     return (
-
-      <mesh
-        ref={ref}
-        scale={clicked ? 2 : 1.5}
-        /*  onClick={(event) => click(!clicked)} */
-        onPointerOver={(event) => hover(true)}
-        onPointerOut={(event) => hover(false)}>
-        <SofaDark
-          customColor={{ color: colorFree.color }}
-          position={[0, -0.5, 0]}
-        />
-      </mesh>
+      <group>
+        <mesh
+          ref={ref}
+          scale={clicked ? 2 : 1.5}
+          /*  onClick={(event) => click(!clicked)} */
+          onPointerOver={(event) => hover(true)}
+          onPointerOut={(event) => hover(false)}>
+          {
+            isSelected && (
+              <SofaDark
+                customColor={{ color: colorFree.color }}
+                position={[0, -0.5, 0]}
+              />
+            )
+          }
+        </mesh>
+        <mesh
+          ref={ref}
+          scale={0.035}
+          /*  onClick={(event) => click(!clicked)} */
+          onPointerOver={(event) => hover(true)}
+          onPointerOut={(event) => hover(false)}>
+          {
+            !isSelected && (
+              <Puf
+                customColor={{ color: colorFree.color }}
+                customColor2={{color2:colorLegsPuf.color}}
+                position={[0, -20, 0]}
+              />
+            )
+          }
+        </mesh>
+      </group>
 
     )
   }
