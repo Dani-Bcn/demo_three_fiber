@@ -8,19 +8,47 @@ import './App.css'
 
 function App() {
   console.log(SpotLightShadow)
-
   const [colorFree, setColorFree] = useState(
     {
       color: "black"
     }
 
   )
+
   const [iluminationFree, setIluminationFree] = useState(0.5)
+  const [iluminationColor, setIluminationColor] = useState("rgb(250, 250, 250)")
+  const colorIluminationWhite = (() => {
+    setIluminationColor("rgb(250, 250, 250)")
+  })
+  const colorIluminationRed = (() => {
+    setIluminationColor("rgb(255, 211, 211)")
+  })
+  const colorIluminationGreen = (() => {
+    setIluminationColor("rgb(218, 255, 211)")
+  })
+  const colorIluminationBlue = (() => {
+    setIluminationColor("rgb(211, 226, 255)")
+  })
+  const colorIluminationYellow = (() => {
+    setIluminationColor("rgb(255, 252, 211)")
+  })
   const maxIlumination = (() => {
     setIluminationFree(iluminationFree => iluminationFree + 0.10)
   })
   const minIlumination = (() => {
     setIluminationFree(iluminationFree => iluminationFree - 0.10)
+  })
+
+  const changeColorWhite = (() => {
+    setColorFree({
+      color: "rgb(250, 250, 250)"
+    })
+  })
+
+  const changeColorBlack = (() => {
+    setColorFree({
+      color: "rgb(10, 10,10)"
+    })
   })
   const changeColorRed = (() => {
     setColorFree({
@@ -43,9 +71,16 @@ function App() {
   return (
     <div className="App">
       <section>
-        <button onClick={() => changeColorRed()}>Color Red</button>
-        <button onClick={() => changeColorGreen()}>Color Green</button>
-        <button onClick={() => changeColorBlue()}>Color Blue</button>
+      <button onClick={() => colorIluminationWhite()}>Iluimination White</button>
+        <button onClick={() => colorIluminationRed()}>Iluimination Red</button>
+        <button onClick={() => colorIluminationGreen()}>Iluination Green</button>
+        <button onClick={() => colorIluminationBlue()}>Ilumination Blue</button>
+        <button onClick={() => colorIluminationYellow()}>Ilumination Yellow</button>
+        <button onClick={() => changeColorWhite()}>Color model White</button>
+        <button onClick={() => changeColorBlack()}>Color model Black</button>
+        <button onClick={() => changeColorRed()}>Color model Red</button>
+        <button onClick={() => changeColorGreen()}>Color model Green</button>
+        <button onClick={() => changeColorBlue()}>Color model Blue</button>
         <button onClick={() => maxIlumination()}>Ligth +</button>
         <button onClick={() => minIlumination()}>Ligth -</button>
       </section>
@@ -56,17 +91,16 @@ function App() {
       >
 
         //position X ,Y ,Z
-        <spotLight position={[0, 0, 100]} intensity={[iluminationFree]} color={"red"} />
-        <spotLight position={[0, 0, 100]} intensity={[iluminationFree]} />
-        <spotLight position={[0, -100, 0]} intensity={[iluminationFree]} />
-        <spotLight position={[0, 0, -100]} intensity={[iluminationFree]} />
-        <spotLight position={[100, 0, 0]} intensity={[iluminationFree]} />
-        <spotLight position={[0, 100, 0]} intensity={[iluminationFree]} />
-        <spotLight position={[-100, 0, 0]} intensity={[iluminationFree]} />
-        <spotLight position={[0, 100, 0]} intensity={[iluminationFree]} />
+        <spotLight position={[0, 0, 100]} intensity={[iluminationFree]} color={iluminationColor} />
+        <spotLight position={[0, 0, 100]} intensity={[iluminationFree]} color={iluminationColor} />
+        <spotLight position={[0, -100, 0]} intensity={[iluminationFree]} color={iluminationColor} />
+        <spotLight position={[0, 0, -100]} intensity={[iluminationFree]} color={iluminationColor} />
+        <spotLight position={[100, 0, 0]} intensity={[iluminationFree]} color={iluminationColor} />
+        <spotLight position={[0, 100, 0]} intensity={[iluminationFree]} color={iluminationColor} />
+        <spotLight position={[-100, 0, 0]} intensity={[iluminationFree]} color={iluminationColor} />
+        <spotLight position={[0, 100, 0]} intensity={[iluminationFree]} color={iluminationColor} />
         <ambientLight intensity={[0.1]} />
-        <Box position={[-1.2, 0, 0]} />
-        <Box position={[1.2, 0, 0]} />
+        <Box position={[0, 0, 0]} />
         <OrbitControls />
       </Canvas>
     </div>
@@ -77,7 +111,7 @@ function App() {
     // Hold state for hovered and clicked events
     const [hovered, hover] = useState(false)
     const [clicked, click] = useState(false)
-    
+
     // Subscribe this component to the render-loop, rotate the mesh every frame
     /*  useFrame((state, delta) => (ref.current.rotation.x += delta)) */
     // Return the view, these are regular Threejs elements expressed in JSX
@@ -92,6 +126,7 @@ function App() {
         onPointerOut={(event) => hover(false)}>
         <SofaDark
           customColor={{ color: colorFree.color }}
+          position={[0, -0.5, 0]}
         />
       </mesh>
 
