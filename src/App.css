@@ -1,1 +1,29 @@
+  .App{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(82, 82, 82);
+  } 
+  .App section{
+    width: 100px;
+    height: 100px;
+    margin: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;  
+  }
+  .App button{
+    width: 100px;
+    height: 50px;
+    padding: 10px;
+    margin: 5px;
+  }
   
+  .canvas {
+    background-color: rgb(226, 226, 226);
+    width: 50%!important;
+    height: 50%!important;
+  }
