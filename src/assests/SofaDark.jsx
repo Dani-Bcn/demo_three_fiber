@@ -12,23 +12,17 @@ export function SofaDark(props) {
   const { nodes, materials } = useGLTF('/sofaDark.gltf')
   const { color } = props.customColor
 
-
   const handleClick = (() => {
 
     if (group.current) {
       console.log(group.current.children[0].name)
-    
-   
     }
   })
 
 
   return (
     <group ref={group} onClick={() => handleClick()} {...props} dispose={null}>
-
-          <mesh name="coco"geometry={nodes.Cushion_Seats_002_Cushion_Seats.geometry} material={materials.Fabric_Couch} material-color={color} />
-     
-    
+      <mesh name="coco" geometry={nodes.Cushion_Seats_002_Cushion_Seats.geometry} material={materials.Fabric_Couch} material-color={color} />
       <mesh geometry={nodes.Cushion_Seats_003_Cushion_Seats.geometry} material={materials.Fabric_Couch} />
       <mesh geometry={nodes.Cushion_Seats001_Cushion_Seats.geometry} material={materials.Fabric_Couch} />
       <mesh geometry={nodes.William_302_Zanotta_Legs001.geometry} material={materials.Metal} />

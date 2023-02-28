@@ -3,10 +3,13 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, SpotLightShadow } from '@react-three/drei'
 import { SofaDark } from './assests/SofaDark'
 import { Puf } from './assests/Puf'
+import { Puf2 } from './assests/Puf2'
+import { Taburete } from './assests/Taburete'
 import { motion as m } from 'framer-motion'
 
 
 import './App.css'
+
 
 function App() {
   console.log(SpotLightShadow)
@@ -200,7 +203,7 @@ const changeColor2Green =(()=>{
           onPointerOut={(event) => hover(false)}>
           {
             !isSelected && (
-              <Puf
+              <Puf2
                 customColor={{ color: colorFree.color }}
                 customColor2={{color2:colorLegsPuf.color}}
                 position={[0, -20, 0]}
